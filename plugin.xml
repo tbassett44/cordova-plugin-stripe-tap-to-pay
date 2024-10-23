@@ -16,7 +16,7 @@
         <!-- add use_frameworks! to Podfile, this also disabled bridging headers -->
         <preference name="pods_use_frameworks" value="true"/>
         <!-- use the latest version of a pod -->
-        <pod name="Gallery" git="git@github.com:/hyperoslo/Gallery.git" tag="2.4.0"/>
+        <pod name="StripeTerminal" git="git@github.com:/stripe/stripe-terminal-ios.git" tag="3.0"/>
         
     </platform>
 </plugin>
