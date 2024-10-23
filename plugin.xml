@@ -1,10 +1,16 @@
 <?xml version='1.0' encoding='utf-8'?>
-<plugin id="cordova-plugin-stripe-tap-to-pay" version="1.0.0" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+<plugin id="cordova-plugin-stripe-tap-to-pay" version="1.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
     <name>cordova-plugin-stripe-tap-to-pay</name>
     <js-module name="cordova-plugin-stripe-tap-to-pay" src="www/cordova-plugin-stripe-tap-to-pay.js">
         <clobbers target="cordova.plugins.stripeTapToPay" />
     </js-module>
     <platform name="ios">
+        <config-file target="*-Debug.plist" parent="com.apple.developer.proximity-reader.payment.acceptance">
+            <true/>
+          </config-file>
+        <config-file target="*-Release.plist" parent="com.apple.developer.proximity-reader.payment.acceptance">
+            <true/>
+          </config-file>
         <source-file src="src/ios/cordova-plugin-stripe-tap-to-pay.swift" />
         <preference name="pods_ios_min_version" value="8.0"/>
         <!-- add use_frameworks! to Podfile, this also disabled bridging headers -->
