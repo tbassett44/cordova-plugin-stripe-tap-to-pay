@@ -1,0 +1,31 @@
+{
+  "name": "cordova-plugin-stripe-tap-to-pay",
+  "version": "1.0.0",
+  "description": "Cordova Stripe Tap To Pay Terminal SDK",
+  "cordova": {
+    "id": "ccordova-plugin-stripe-tap-to-pay",
+    "platforms": [
+      "ios"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tbassett44/cordova-plugin-stripe-tap-to-pay.git"
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "ecosystem:phonegap",
+    "cordova-ios",
+    "cordova-android",
+    "stripe terminal sdk"
+  ],
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=3.0.0"
+    }
+  ],
+  "author": "Tom Bassett",
+  "license": "MIT",
+  "homepage": "https://github.com/tbassett44/cordova-plugin-stripe-tap-to-pay"
+}
