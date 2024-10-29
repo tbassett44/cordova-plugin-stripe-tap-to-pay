@@ -19,6 +19,8 @@ cordova.plugins.stripeTapToPay.initialize(function(){
 	    onSuccessReaderDiscovery:function(){console.log('onSuccessReaderDiscovery')},
 	    onFailPaymentIntent:function(){console.log('onFailPaymentIntent')},
 	    onFailPaymentMethodCollect:function(){console.log('onFailPaymentMethodCollect')},
+	    onFailConfirmPaymentIntent:function(){console.log('onFailConfirmPaymentIntent')},
+    onSuccessConfirmPaymentIntent:function(){console.log('onSuccessConfirmPaymentIntent')},
 	    onSuccessfulPaymentMethodCollect:function(){console.log('onSuccessfulPaymentMethodCollect')},
 	    onSuccessfulPaymentIntent:function(resp){console.log('onSuccessfulPaymentIntent')},
 	    onCreatePaymentIntentFail:function(){console.log('onCreatePaymentIntentFail')},
