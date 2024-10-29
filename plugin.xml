@@ -1,10 +1,15 @@
 <?xml version='1.0' encoding='utf-8'?>
-<plugin id="cordova-plugin-stripe-tap-to-pay" version="1.0.2" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+<plugin id="cordova-plugin-stripe-tap-to-pay" version="1.0.0" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
     <name>cordova-plugin-stripe-tap-to-pay</name>
     <js-module name="cordova-plugin-stripe-tap-to-pay" src="www/cordova-plugin-stripe-tap-to-pay.js">
         <clobbers target="cordova.plugins.stripeTapToPay" />
     </js-module>
     <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+        <feature name="CDVStripeTapToPay">
+            <param name="ios-package" value="CDVStripeTapToPay" />
+        </feature>
+        </config-file>
         <config-file target="*-Debug.plist" parent="com.apple.developer.proximity-reader.payment.acceptance">
             <true/>
           </config-file>
@@ -12,11 +17,14 @@
             <true/>
           </config-file>
         <source-file src="src/ios/cordova-plugin-stripe-tap-to-pay.swift" />
-        <preference name="pods_ios_min_version" value="8.0"/>
-        <!-- add use_frameworks! to Podfile, this also disabled bridging headers -->
-        <preference name="pods_use_frameworks" value="true"/>
-        <!-- use the latest version of a pod -->
-        <pod name="StripeTerminal" git="git@github.com:/stripe/stripe-terminal-ios.git" tag="3.0"/>
-        
+        <source-file src="src/ios/cordova-plugin-stripe-tap-to-pay-utils.swift" />
+        <podspec>
+          <config>
+            <source url="https://github.com/CocoaPods/Specs.git"/>
+          </config>
+          <pods use-frameworks="true">
+            <pod name="StripeTerminal" spec="~> 3.0" />
+          </pods>
+        </podspec>
     </platform>
 </plugin>
