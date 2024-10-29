@@ -1,7 +1,39 @@
 cordova-plugin-stripe-tap-to-pay
 ===================
-Documentation coming soon...
 
+Usage
+```
+cordova.plugins.stripeTapToPay.initialize(function(){
+	console.log('success')
+	},function(err){
+	console.log(err);
+},{
+	amount:1000,//amount in USD cents
+	simulated:false,//true||false,//you will need to do false until you get permission from apple
+	description:"descriptor on charge/payment",
+	merchantName:"Merchant Name",
+	locationId:"location ID from Stripe",
+	tokenUrl:"<url>",
+	callbacks:{
+		onFailReaderDiscovery:function(){console.log('onFailReaderDiscovery')},
+	    onSuccessReaderDiscovery:function(){console.log('onSuccessReaderDiscovery')},
+	    onFailPaymentIntent:function(){console.log('onFailPaymentIntent')},
+	    onFailPaymentMethodCollect:function(){console.log('onFailPaymentMethodCollect')},
+	    onSuccessfulPaymentMethodCollect:function(){console.log('onSuccessfulPaymentMethodCollect')},
+	    onSuccessfulPaymentIntent:function(resp){console.log('onSuccessfulPaymentIntent')},
+	    onCreatePaymentIntentFail:function(){console.log('onCreatePaymentIntentFail')},
+	    onSuccessfulReaderConnect:function(){console.log('onSuccessfulReaderConnect')},
+	    onFailReaderConnect:function(){console.log('onFailReaderConnect')},
+	    didReportUnexpectedReaderDisconnect:function(){console.log('didReportUnexpectedReaderDisconnect')},
+	    didChangeConnectionStatus:function(){console.log('didChangeConnectionStatus')},
+	    didChangePaymentStatus:function(){console.log('didChangePaymentStatus')},
+	    didStartInstallingUpdate:function(){console.log('didStartInstallingUpdate')},
+	    errorInstalling:function(){console.log('errorInstalling')},
+	    successInstalling:function(){console.log('successInstalling')},
+	    onDownloadProgress:function(data){console.log('onDownloadProgress',data)}
+	}
+})
+```
 ## License
 
 The MIT License
