@@ -241,8 +241,10 @@ public class CDVStripeTapToPay: CDVPlugin, ConnectionTokenProvider,LocalMobileRe
                         Terminal.shared.confirmPaymentIntent(collectPaymentMethodPaymentIntent) { confirmResult, confirmError in
                             if let error = confirmError {
                                 self.sendLogToPlugin("confirmPaymentIntent failed: \(error)")
+                                self.sendToPlugin("onFailConfirmPaymentIntent");
                             } else if let confirmedPaymentIntent = confirmResult {
                                 self.sendLogToPlugin("confirmPaymentIntent succeeded")
+                                self.sendToPlugin("onSuccessConfirmPaymentIntent");
                                 // Notify your backend to capture the PaymentIntent
                                 if let stripeId = confirmedPaymentIntent.stripeId {
                                     self.sendLogToPlugin("Stripe ID: "+stripeId);

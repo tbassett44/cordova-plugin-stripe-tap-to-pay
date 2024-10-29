@@ -1,5 +1,46 @@
 var exec = require('cordova/exec');
+exports.checkVersion=function(){
+  var failure_reason='';
+  if(!window.device){
+    return 'this is only available in phonegap/cordova app';
+  }
+  if(window.device.platform=='iOS'){
+    var versionInfo=window.device.version.split('.');
+    //var versionInfo=('16.2').split('.');
+    var minVersion='16.4';
+    // var testMinVersionFail='17.7';
+    // minVersion=testMinVersionFail;
+    minVersionInfo=minVersion.split('.');
+    var ios_fcb_msg='Minimum iOS version is '+minVersion+', you are currently running iOS version '+window.device.version+'.  Please update your device OS.';
+    var info={
+      min:{
+        major:parseInt(minVersionInfo[0],10),
+        minor:parseInt(minVersionInfo[1],10)
+      },
+      current:{
+        major:parseInt(versionInfo[0],10),
+        minor:parseInt(versionInfo[1],10)
+      }
+    }
+    //console.log(info);
+    if(info.current.major<=info.min.major){
+      if(info.current.major==info.min.major){
+        if(info.current.minor<info.min.minor){
+          failure_reason=ios_fcb_msg;
+        }
+      }else{
+        failure_reason=ios_fcb_msg;
+      }
+    }
+  }
+  if(window.device.platform=='Android'){
+
+  }
+  return failure_reason;
+}
 exports.initialize = function(callback,failureCallback,options){
+  //version detect
+  if(this.checkVersion()) return failureCallback(this.checkVersion())
   if(options.callbacks){
     window.cordova.plugins.stripeTapToPay.callbacks=options.callbacks;
     delete options.callbacks;
@@ -17,6 +58,8 @@ exports.callbackHandler = function(method,data){
     onSuccessReaderDiscovery:function(){console.log('onSuccessReaderDiscovery')},
     onFailPaymentIntent:function(){console.log('onFailPaymentIntent')},
     onFailPaymentMethodCollect:function(){console.log('onFailPaymentMethodCollect')},
+    onFailConfirmPaymentIntent:function(){console.log('onFailConfirmPaymentIntent')},
+    onSuccessConfirmPaymentIntent:function(){console.log('onSuccessConfirmPaymentIntent')},
     onSuccessfulPaymentMethodCollect:function(){console.log('onSuccessfulPaymentMethodCollect')},
     onSuccessfulPaymentIntent:function(resp){console.log('onSuccessfulPaymentIntent',resp)},
     onCreatePaymentIntentFail:function(){console.log('onCreatePaymentIntentFail')},
