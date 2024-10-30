@@ -87,7 +87,23 @@ class CDVStripeTapToPay : CordovaPlugin() {
                 val simulated= options!!.simulated;
                 val amount= options!!.amount;
                 val tokenUrl= options!!.tokenUrl;
-                println(options);
+                //if one is already going, cancel it!
+//                Terminal.getInstance().disconnectReader(
+//                    object : Callback {
+//                        override fun onSuccess() {
+//                            // Placeholder for handling successful operation
+//                            //println("onSuccessReaderDiscovery")
+//                            evaluateJavaScriptInCordova("window.cordova.plugins.stripeTapToPay.callbackHandler('onSuccessReaderDisconnect')");
+//                        }
+//
+//                        override fun onFailure(e: TerminalException) {
+//                            // Placeholder for handling exception
+//                           // println("onFailReaderDiscovery")
+//                            evaluateJavaScriptInCordova("window.cordova.plugins.stripeTapToPay.callbackHandler('onFailReaderDisconnect')");
+//                        }
+//                    }
+//                )
+                //Terminal.getInstance().clearCachedCredentials();
                 val listener = object : TerminalListener {
                     override fun onUnexpectedReaderDisconnect(reader: com.stripe.stripeterminal.external.models.Reader) {
                         println("onUnexpectedReaderDisconnect")
@@ -103,6 +119,7 @@ class CDVStripeTapToPay : CordovaPlugin() {
                 val config = DiscoveryConfiguration.LocalMobileDiscoveryConfiguration(
                     isSimulated = simulated,
                 )
+                disconnectReader();
                 discoverCancelable = Terminal.getInstance().discoverReaders(
                     config,
                     object : DiscoveryListener {
@@ -182,7 +199,8 @@ class CDVStripeTapToPay : CordovaPlugin() {
                         override fun onFailure(e: TerminalException) {
                             // Placeholder for handling exception
                             println("onFailReaderDiscovery")
-                            evaluateJavaScriptInCordova("window.cordova.plugins.stripeTapToPay.callbackHandler('onFailReaderDiscovery')");
+                            val msg=e.toString()
+                            evaluateJavaScriptInCordova("window.cordova.plugins.stripeTapToPay.callbackHandler('onFailReaderDiscovery','$msg')");
                         }
                     }
                 )
@@ -208,6 +226,23 @@ class CDVStripeTapToPay : CordovaPlugin() {
                 println("JavaScript execution result: $result")
             }
         }
+    }
+    private fun disconnectReader(){
+        if(Terminal.getInstance().connectedReader != null) Terminal.getInstance().disconnectReader(
+            object : Callback {
+                override fun onSuccess() {
+                    // Placeholder for handling successful operation
+                    //println("onSuccessReaderDiscovery")
+                    //evaluateJavaScriptInCordova("window.cordova.plugins.stripeTapToPay.callbackHandler('onSuccessReaderDisconnect')");
+                }
+
+                override fun onFailure(e: TerminalException) {
+                    // Placeholder for handling exception
+                    // println("onFailReaderDiscovery")
+                    //evaluateJavaScriptInCordova("window.cordova.plugins.stripeTapToPay.callbackHandler('onFailReaderDisconnect')");
+                }
+            }
+        )
     }
     /**
      * Handles an error while executing a plugin API method.
