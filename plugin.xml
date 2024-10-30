@@ -1,9 +1,20 @@
 <?xml version='1.0' encoding='utf-8'?>
-<plugin id="cordova-plugin-stripe-tap-to-pay" version="1.1.1" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+<plugin id="cordova-plugin-stripe-tap-to-pay" version="2.0.0" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
     <name>cordova-plugin-stripe-tap-to-pay</name>
     <js-module name="cordova-plugin-stripe-tap-to-pay" src="www/cordova-plugin-stripe-tap-to-pay.js">
         <clobbers target="cordova.plugins.stripeTapToPay" />
     </js-module>
+    <platform name="android">
+        <config-file target="config.xml" parent="/*">
+          <feature name="CDVStripeTapToPay">
+            <param name="android-package" value="cordova.plugin.CDVStripeTapToPay"/>
+          </feature>
+        </config-file>
+        <framework src="com.stripe:stripeterminal-core:3.10.0" />
+        <framework src="com.stripe:stripeterminal-localmobile:3.10.0" />
+        <framework src="com.google.code.gson:gson:2.8.8"/>
+        <source-file src="src/android/cordova-plugin-stripe-tap-to-pay.kt" target-dir="app/src/main/java/cordova/plugin"/>
+    </platform>
     <platform name="ios">
         <config-file target="config.xml" parent="/*">
         <feature name="CDVStripeTapToPay">

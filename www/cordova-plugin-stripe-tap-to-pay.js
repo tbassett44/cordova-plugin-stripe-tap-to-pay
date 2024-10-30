@@ -1,4 +1,10 @@
 var exec = require('cordova/exec');
+exports.hello=function (input, successCallback, errorCallback) {
+    exec(successCallback, errorCallback, "CDVStripeTapToPay", "hello", [input]);
+}
+exports.ensurePermissions=function (input, successCallback, errorCallback) {
+    exec(successCallback, errorCallback, "CDVStripeTapToPay", "ensurePermissions", [input]);
+}
 exports.checkVersion=function(){
   var failure_reason='';
   if(!window.device){
